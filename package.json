@@ -4,8 +4,18 @@
   "description": "coding challenge for logDNA",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha",
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts",
+    "nodemon": "nodemon --exec nodejs ./index.js",
+    "client": "nodejs ./client.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^7.0.12",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "ts-node": "^3.0.2"
+  }
 }
