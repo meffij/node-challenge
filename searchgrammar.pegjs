@@ -1,6 +1,5 @@
-searchExpression = "(" _ term:searchExpression _ ")"
-    { return term; }
-  / term0:term _ "OR" _ term1:term
+searchExpression =
+  term0:term _ "OR" _ term1:term
     { return {op : "OR", terms : [term0, term1] }; }
   / term0:term _ "AND"? _ term1:term
     { return {op : "AND", terms : [term0, term1] }; }
@@ -9,15 +8,18 @@ searchExpression = "(" _ term:searchExpression _ ")"
 term = 
   "len(" num:[0-9]+ ")" 
     { return { op : "len", value : parseInt(num.join(''), 10) }; }
-  / unary:unary _ term:searchExpression {
+  / unary:unary _ term:term {
     return {op : unary, terms : [term]};
   }
-  / id:id { return id; }
+  / id:expr { return id; }
 
 unary = ">=" / "<=" / "=" / "<" / ">" / "!"
 
-// len
 // quote escaping working correctly?
+
+expr = 
+  "(" _ term:searchExpression _ ")" { return term; }
+  / id
 
 id = "true" { return true; }
   / "false" { return false; }
