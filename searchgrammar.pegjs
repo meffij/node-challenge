@@ -6,7 +6,7 @@ searchExpression =
   / term:term { return term; }
 
 term = 
-  "len(" num:[0-9]+ ")" 
+  "len" _ "(" _ num:[0-9]+ _ ")" 
     { return { op : "len", value : parseInt(num.join(''), 10) }; }
   / unary:unary _ term:term {
     return {op : unary, terms : [term]};
