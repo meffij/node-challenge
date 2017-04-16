@@ -15,8 +15,6 @@ term =
 
 unary = ">=" / "<=" / "=" / "<" / ">" / "!"
 
-// quote escaping working correctly?
-
 expr = 
   "(" _ term:searchExpression _ ")" { return term; }
   / id
