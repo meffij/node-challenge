@@ -23,7 +23,7 @@ expr =
 
 id = "true" { return true; }
   / "false" { return false; }
-  / "\"" string:([^"] / ("\\\""))+ "\"" { return string.join(''); }
+  / '"' string:(('\\"') / [^"])+ '"' { return string.join(''); }
   / [0-9a-zA-Z]+ { return text(); }
 
 _ "whitespace"
